@@ -1,0 +1,1 @@
+docker-compose -p "bank-saint-patrick" up -d
