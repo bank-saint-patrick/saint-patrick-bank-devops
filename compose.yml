@@ -1,22 +1,33 @@
 version: '3'
 services:
-  proxy:
-    container_name: saintp_proxy
-    image: 'jc21/nginx-proxy-manager:latest'
+  api:
+    container_name: saintp_api
+    image: saintp_api
     restart: always
     ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
+      - '5000:81'
+    networks:
+      nwk1:
+        ipv4_address: 10.1.0.4
+  db:
+    container_name: saintp_postgres
+    image: saintp_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Admin
+      PGDATA: /var/lib/postgresql/data/pgdata 
+    ports:
+      - '5432:5432'
     volumes:
-      - ./proxy/data:/data
-      - ./proxy/letsencrypt:/etc/letsencrypt
+      - ./postgres/init/:/docker-entrypoint-initdb.d
+      - ./postgres/data/:/var/lib/postgresql/data
     networks:
       nwk1:
         ipv4_address: 10.1.0.2
   website:
     container_name: saintp_website
-    image: 'node_react'
+    image: 'saintp_website'
     restart: always
     ports:
       - '3000:3000'
@@ -25,22 +36,7 @@ services:
     networks:
       nwk1:
         ipv4_address: 10.1.0.3
-  db:
-    container_name: saintp_db
-    image: postgres:latest
-    restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      PGDATA: /var/lib/postgresql/data/pgdata 
-    ports:
-      - '5432:5432'
-    volumes:
-      - ./env-postgres/init/:/docker-entrypoint-initdb.d
-      - ./env-postgres/data/:/var/lib/postgresql/data
-    networks:
-      nwk1:
-        ipv4_address: 10.1.0.4
+  
 networks:
   nwk1:
     driver: bridge
