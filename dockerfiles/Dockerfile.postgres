@@ -1,5 +1,5 @@
 FROM postgres:latest
-
+COPY init/init.sql /docker-entrypoint-initdb.d/
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=Admin
 ENV PGDATA=/var/lib/postgresql/data/pgdata

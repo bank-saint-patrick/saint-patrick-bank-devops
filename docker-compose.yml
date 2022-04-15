@@ -1,14 +1,14 @@
 version: '3'
 services:
-  api:
-    container_name: saintp_api
-    image: saintp_api
-    restart: always
-    ports:
-      - '5000:81'
-    networks:
-      nwk1:
-        ipv4_address: 10.1.0.4
+  # api:
+  #   container_name: saintp_api
+  #   image: saintp_api
+  #   restart: always
+  #   ports:
+  #     - '5000:81'
+  #   networks:
+  #     nwk1:
+  #       ipv4_address: 10.1.0.4
   db:
     container_name: saintp_postgres
     image: saintp_postgres
@@ -25,17 +25,6 @@ services:
     networks:
       nwk1:
         ipv4_address: 10.1.0.2
-  website:
-    container_name: saintp_website
-    image: 'saintp_website'
-    restart: always
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./website:/app
-    networks:
-      nwk1:
-        ipv4_address: 10.1.0.3
   
 networks:
   nwk1:
