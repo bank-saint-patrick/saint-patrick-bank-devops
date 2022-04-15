@@ -57,5 +57,5 @@ docker-compose -p "saintp" up -d
 echo "\n"
 
 echo "run frontend"
-docker run -v 80:80 --name saintp_website saintp_website
+docker run -p 80:80 --name saintp_website saintp_website
 echo "\n"
