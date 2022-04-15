@@ -9,7 +9,7 @@ docker container rm saintp_website saintp_api saintp_postgres
 echo "\n"
 
 echo "removing images"
-docker rmi saintp_website saintp_api saintp_postgres
+docker rmi saintp_website saintp_api saintp_postgres mcr.microsoft.com/dotnet/sdk mcr.microsoft.com/dotnet/aspnet postgres node
 echo "\n"
 
 echo "removing backend directory"

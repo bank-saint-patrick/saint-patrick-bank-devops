@@ -22,6 +22,7 @@ echo "\n"
 
 echo "installing frontend dependencies"
 cp ./configs/.env-frontend ./website/.env
+cp ./configs/nginx.conf ./website/
 cd website && npm install
 npm run build
 cd ..
